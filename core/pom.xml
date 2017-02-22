@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.mobicents.diameter</groupId>
     <artifactId>diameter-parent</artifactId>
-    <version>1.7.0.134</version>
+    <version>1.7.0.135-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -17,8 +17,6 @@
 
   <modules>
     <module>jdiameter</module>
-    <module>jdiameter-ha</module>
-    <module>mux</module>
   </modules>
 
   <properties>

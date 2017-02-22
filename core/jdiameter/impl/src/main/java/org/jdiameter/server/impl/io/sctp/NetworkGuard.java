@@ -141,8 +141,10 @@ public class NetworkGuard implements INetworkGuard {
       try {
         SCTPServerConnection server = it.next();
         it.remove();
-        if (server != null && server.isConnected()) {
-          server.disconnect();
+        if (server != null) {
+          if (server.isConnected()) {
+            server.disconnect();
+          }
           server.destroy();
         }
       }

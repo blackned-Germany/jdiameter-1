@@ -186,7 +186,10 @@ public class SCTPServerConnection implements IConnection {
 
   @Override
   public InetAddress getRemoteAddress() {
-    return getServer().getDestAddress().getAddress();
+    if (getServer().getDestAddress() != null) {
+      return getServer().getDestAddress().getAddress();
+    }
+    return null;
   }
 
   @Override
@@ -260,9 +263,10 @@ public class SCTPServerConnection implements IConnection {
 
   @Override
   public String getKey() {
-    if (this.cachedKey == null) {
-      this.cachedKey = new StringBuffer("aaa://").append(getRemoteAddress().getHostName()).append(":").append(getRemotePort())
-          .toString();
+    if ((this.cachedKey == null || this.cachedKey.isEmpty()) && getRemoteAddress() != null) {
+      this.cachedKey = "aaa://" + getRemoteAddress().getHostName() + ":" + getRemotePort();
+    } else {
+      this.cachedKey = "";
     }
 
     return this.cachedKey;
