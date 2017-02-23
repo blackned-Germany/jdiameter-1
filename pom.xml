@@ -78,6 +78,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <additionalparam>-Xdoclint:none</additionalparam>
+          <encoding>ISO-8859-1</encoding>
         </configuration>
       </plugin>
       <plugin>
