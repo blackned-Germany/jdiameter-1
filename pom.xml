@@ -10,7 +10,7 @@
 
   <groupId>org.mobicents.diameter</groupId>
   <artifactId>diameter-parent</artifactId>
-  <version>1.7.0.135-SNAPSHOT</version>
+  <version>1.7.0.136-SNAPSHOT</version>
 
   <packaging>pom</packaging>
 
@@ -78,6 +78,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <additionalparam>-Xdoclint:none</additionalparam>
+          <encoding>ISO-8859-1</encoding>
         </configuration>
       </plugin>
       <plugin>
@@ -119,6 +120,29 @@
           <target>${compile.source}</target>
           <encoding>ISO-8859-1</encoding>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.1</version>
+        <configuration>
+          <tagNameFormat>v@{project.version}</tagNameFormat>
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>none</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
@@ -230,6 +254,7 @@
     <connection>scm:git:git@bned-gitlab.blackned.intern:opensource/jdiameter-1-7.git</connection>
     <developerConnection>scm:git:git@bned-gitlab.blackned.intern:opensource/jdiameter-1-7.git</developerConnection>
     <url>scm:git:git@bned-gitlab.blackned.intern:opensource/jdiameter-1-7.git</url>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
