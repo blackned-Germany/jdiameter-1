@@ -199,7 +199,8 @@ public final class StackManager {
    */
   public static synchronized void deregisterStack(Stack stack) throws InternalException {
     // Gets the classloader of the code that called this method, may be null.
-    ClassLoader callerCL = ClassLoader.getSystemClassLoader();
+    ClassLoader callerClassLoader = stack.getClass().getClassLoader();
+
     println(new StringBuilder().append("StackManager.deregisterStack: ").append(stack).toString());
     // Walk through the loaded stacks.
     int i;
@@ -216,7 +217,7 @@ public final class StackManager {
       return;
     }
     // If the caller does not have permission to load the stack then throw a security exception.
-    if (stackInfo == null || getCallerClass(callerCL, stackInfo.stackClassName) != stackInfo.stackClass) {
+    if (stackInfo == null || getCallerClass(callerClassLoader, stackInfo.stackClassName) != stackInfo.stackClass) {
       throw new SecurityException();
     }
     // Remove the stack.  Other entries in stacks get shuffled down.
@@ -237,15 +238,8 @@ public final class StackManager {
     if (!initialized) {
       initialize();
     }
-    // Gets the classloader of the code that called this method, may be null.
-    ClassLoader callerCL = ClassLoader.getSystemClassLoader();
     // Walk through the loaded stacks.
     for (StackInfo di : stacks) {
-      // If the caller does not have permission to load the stack then skip it.
-      if (getCallerClass(callerCL, di.stackClassName) != di.stackClass) {
-        println(new StringBuilder().append("    skipping: ").append(di).toString());
-        continue;
-      }
       result.add(di.stack);
     }
 
