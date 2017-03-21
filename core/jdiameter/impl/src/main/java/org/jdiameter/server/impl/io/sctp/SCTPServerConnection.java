@@ -263,12 +263,12 @@ public class SCTPServerConnection implements IConnection {
 
   @Override
   public String getKey() {
-    if ((this.cachedKey == null || this.cachedKey.isEmpty()) && getRemoteAddress() != null) {
-      this.cachedKey = "aaa://" + getRemoteAddress().getHostName() + ":" + getRemotePort();
-    } else {
+    if (this.cachedKey == null) {
       this.cachedKey = "";
     }
-
+    if (this.cachedKey.isEmpty() && getRemoteAddress() != null) {
+      this.cachedKey = "aaa://" + getRemoteAddress().getHostName() + ":" + getRemotePort();
+    }
     return this.cachedKey;
   }
 
