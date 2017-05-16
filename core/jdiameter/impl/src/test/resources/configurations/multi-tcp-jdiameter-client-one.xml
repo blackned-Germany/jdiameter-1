@@ -2,10 +2,9 @@
 <Configuration xmlns="http://www.jdiameter.org/jdiameter-server">
 
   <LocalPeer>
-    <URI value="aaa://127.0.0.22:3868" />
+    <URI value="aaa://client1.mobicents.org" />
     <IPAddresses>
-      <IPAddress value="127.0.0.111" />
-      <IPAddress value="127.0.0.222" />
+      <IPAddress value="127.0.0.1" />
     </IPAddresses>
     <Realm value="mobicents.org" />
     <VendorID value="193" />
@@ -26,7 +25,7 @@
     <AcceptUndefinedPeer value="true" />
     <DuplicateProtection value="true" />
     <DuplicateTimer value="240000" />
-    <UseUriAsFqdn value="false" />
+    <UseUriAsFqdn value="true" />
     <QueueSize value="10000" />
     <MessageTimeOut value="60000" />
     <StopTimeOut value="10000" />
@@ -57,13 +56,11 @@
 
   <Network>
     <Peers>
-      <!--<Peer name="client1.mobicents.org" attempt_connect="false" rating="1" />-->
-      <!--<Peer name="client2.mobicents.org" attempt_connect="false" rating="1" />-->
-      <Peer name="" attempt_connect="false" rating="1" />
+      <Peer name="aaa://127.0.0.111:3868" attempt_connect="true" rating="1" />
     </Peers>
 
     <Realms>
-      <Realm name="test.mobicents.org" peers="" local_action="LOCAL" dynamic="true" exp_time="1">
+      <Realm name="test.mobicents.org" peers="127.0.0.111" local_action="LOCAL" dynamic="false" exp_time="1">
         <ApplicationID>
           <VendorId value="193" />
           <AuthApplId value="0" />
@@ -72,13 +69,5 @@
       </Realm>
     </Realms>
   </Network>
-
-  <Extensions>
-    <!-- Set SCTP classes as extension points for Connection and Network Guard -->
-    <Connection value="org.jdiameter.client.impl.transport.sctp.SCTPClientConnection" />
-    <!-- <Connection value="org.jdiameter.client.impl.transport.tcp.TCPClientConnection" /> -->
-    <NetworkGuard value="org.jdiameter.server.impl.io.sctp.NetworkGuard" />
-    <!-- <NetworkGuard value="org.jdiameter.server.impl.io.tcp.NetworkGuard" /> -->
-  </Extensions>
 
 </Configuration>

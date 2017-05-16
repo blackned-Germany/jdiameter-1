@@ -33,7 +33,7 @@
     <CeaTimeOut value="10000" />
     <IacTimeOut value="30000" />
     <DwaTimeOut value="10000" />
-    <DpaTimeOut value="5000" />
+    <DpaTimeOut value="10000" />
     <RecTimeOut value="10000" />
 
     <!-- Statistics Logger Configuration -->
@@ -72,13 +72,5 @@
       </Realm>
     </Realms>
   </Network>
-
-  <Extensions>
-    <!-- Set SCTP classes as extension points for Connection and Network Guard -->
-    <Connection value="org.jdiameter.client.impl.transport.sctp.SCTPClientConnection" />
-    <!-- <Connection value="org.jdiameter.client.impl.transport.tcp.TCPClientConnection" /> -->
-    <NetworkGuard value="org.jdiameter.server.impl.io.sctp.NetworkGuard" />
-    <!-- <NetworkGuard value="org.jdiameter.server.impl.io.tcp.NetworkGuard" /> -->
-  </Extensions>
 
 </Configuration>

@@ -77,10 +77,10 @@ public abstract class StackConnectMultiBaseTest {
         }
       }, ApplicationId.createByAccAppId(193, 19302));
       server.start();
-      _wait();
+/*      _wait();
       server.stop(5, TimeUnit.SECONDS, DisconnectCause.REBOOTING);
       _wait();
-      server.start();
+      server.start();*/
 
       List<Peer> peers = server.unwrap(PeerTable.class).getPeerTable();
       assertEquals("Wrong num of connections, initial setup did not succeed. ", 0, peers.size());
@@ -112,7 +112,7 @@ public abstract class StackConnectMultiBaseTest {
           return null;
         }
       }, ApplicationId.createByAccAppId(193, 19302));
-      client2.start(Mode.ALL_PEERS, 10000000, TimeUnit.MILLISECONDS);
+      //client2.start(Mode.ALL_PEERS, 10000000, TimeUnit.MILLISECONDS);
 
       _wait(); // FIXME: This should not be needed. We are checking before peer state is updated...
 
@@ -125,10 +125,11 @@ public abstract class StackConnectMultiBaseTest {
       assertTrue("Peer not connected. State[" + p.getState(PeerState.class) + "]", ((IPeer) peers.get(0)).isConnected());
       assertEquals("Peer has wrong realm.", "mobicents.org", p.getRealmName());
 
+
     }
     finally {
       try {
-        client1.stop(DisconnectCause.REBOOTING);
+        client1.stop(10, TimeUnit.SECONDS, DisconnectCause.REBOOTING);
         client1.destroy();
       }
       catch (Exception e) {
@@ -136,6 +137,7 @@ public abstract class StackConnectMultiBaseTest {
         e.printStackTrace();
       }
       _wait();
+      Thread.sleep(20000);
       try {
         client2.stop(DisconnectCause.REBOOTING);
         client2.destroy();
@@ -153,6 +155,7 @@ public abstract class StackConnectMultiBaseTest {
         logger.warn("Failed to stop/destroy SERVER stack.", e);
         e.printStackTrace();
       }
+      Thread.sleep(999999999);
     }
   }
 
